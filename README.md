@@ -14,7 +14,7 @@ and estimating the next period start date.
 
 ## Project Structure
 
-
+```text
 cycle_tracker_project/
 ├── pyproject.toml
 ├── README.md

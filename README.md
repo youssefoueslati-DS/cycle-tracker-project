@@ -32,7 +32,7 @@ cycle_tracker_project/
 - Python 3.10 or newer
 - uv installed
 
-##Installation
+## Installation
 
  Clone the repository and move into the project folder:
 ```

@@ -17,14 +17,16 @@ def save_data(data: dict) -> None:
         json.dump(data, file, indent=2)
 
 
-def add_period_start(date_str: str) -> None:
+def add_period_start(date_str: str) -> bool:
     data = load_data()
 
-    if date_str not in data["period_starts"]:
-        data["period_starts"].append(date_str)
-        data["period_starts"].sort()
+    if date_str in data["period_starts"]:
+        return False
 
+    data["period_starts"].append(date_str)
+    data["period_starts"].sort()
     save_data(data)
+    return True
 
 
 def get_period_starts() -> list[str]:

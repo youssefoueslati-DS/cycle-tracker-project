@@ -32,8 +32,12 @@ def handle_add(args: list[str]) -> None:
         print("Error: invalid date. Use YYYY-MM-DD")
         return
 
-    add_period_start(date_str)
-    print(f"Added period start date: {date_str}")
+    was_added = add_period_start(date_str)
+
+    if was_added:
+        print(f"Added period start date: {date_str}")
+    else:
+        print(f"Date already exists: {date_str}")
 
 
 def handle_history() -> None:

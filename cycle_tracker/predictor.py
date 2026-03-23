@@ -1,4 +1,9 @@
 from datetime import datetime, timedelta
+from statistics import median
+
+
+MIN_CYCLE_LENGTH = 15
+MAX_CYCLE_LENGTH = 45
 
 
 def parse_dates(date_strings: list[str]) -> list[datetime]:
@@ -19,22 +24,41 @@ def get_cycle_lengths(date_strings: list[str]) -> list[int]:
     return cycle_lengths
 
 
-def get_average_cycle_length(date_strings: list[str]) -> float | None:
+def get_valid_cycle_lengths(date_strings: list[str]) -> list[int]:
     cycle_lengths = get_cycle_lengths(date_strings)
 
-    if not cycle_lengths:
+    return [
+        length
+        for length in cycle_lengths
+        if MIN_CYCLE_LENGTH <= length <= MAX_CYCLE_LENGTH
+    ]
+
+
+def get_average_cycle_length(date_strings: list[str]) -> float | None:
+    valid_lengths = get_valid_cycle_lengths(date_strings)
+
+    if not valid_lengths:
         return None
 
-    return sum(cycle_lengths) / len(cycle_lengths)
+    return sum(valid_lengths) / len(valid_lengths)
+
+
+def get_median_cycle_length(date_strings: list[str]) -> float | None:
+    valid_lengths = get_valid_cycle_lengths(date_strings)
+
+    if not valid_lengths:
+        return None
+
+    return float(median(valid_lengths))
 
 
 def predict_next_period(date_strings: list[str]) -> str | None:
-    average_cycle_length = get_average_cycle_length(date_strings)
+    typical_cycle_length = get_median_cycle_length(date_strings)
 
-    if average_cycle_length is None:
+    if typical_cycle_length is None:
         return None
 
     last_date = datetime.strptime(date_strings[-1], "%Y-%m-%d")
-    predicted_date = last_date + timedelta(days=round(average_cycle_length))
+    predicted_date = last_date + timedelta(days=round(typical_cycle_length))
 
     return predicted_date.strftime("%Y-%m-%d")

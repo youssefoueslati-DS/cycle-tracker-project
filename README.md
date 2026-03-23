@@ -29,12 +29,12 @@ cycle_tracker_project/
 
 ## Requirements
 
-- Python 3.1o or newer
+- Python 3.10 or newer
 - uv installed
 
 ##Installation
 
-- Clone the repository and move into the project folder:
+ Clone the repository and move into the project folder:
 ```
 git clone https://github.com/youssefoueslati-DS/cycle-tracker-project.git
 cd cycle-tracker-project
@@ -47,22 +47,22 @@ cd cycle-tracker-project
 uv run -m cycle_tracker <command>
 ```
 
--Add a period start date:
+- Add a period start date:
 ```
 uv run -m cycle_tracker add 2026-03-10
 ```
 
--Show history:
+- Show history:
 ```
 uv run -m cycle_tracker history
 ```
 
--Show statistics:
+- Show statistics:
 ```
 uv run -m cycle_tracker stats
 ```
 
--Predict the next period
+- Predict the next period
 ```
 uv run -m cycle_tracker predict
 ```

@@ -14,7 +14,7 @@ and estimating the next period start date.
 
 ## Project Structure
 
-```text
+```
 cycle_tracker_project/
 ├── pyproject.toml
 ├── README.md
@@ -35,26 +35,37 @@ cycle_tracker_project/
 ##Installation
 
 - Clone the repository and move into the project folder:
+```
 git clone https://github.com/youssefoueslati-DS/cycle-tracker-project.git
 cd cycle-tracker-project
+```
 
 ## Usage
 
 - Run the package with:
+```
 uv run -m cycle_tracker <command>
+```
 
 -Add a period start date:
+```
 uv run -m cycle_tracker add 2026-03-10
+```
 
 -Show history:
+```
 uv run -m cycle_tracker history
+```
 
 -Show statistics:
+```
 uv run -m cycle_tracker stats
+```
 
 -Predict the next period
+```
 uv run -m cycle_tracker predict
-
+```
 ## How it works
 
 The program stores period start dates. And from the saved dates,

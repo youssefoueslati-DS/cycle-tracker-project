@@ -25,6 +25,7 @@ cycle_tracker_project/
     ├── cli.py
     ├── storage.py
     └── predictor.py
+```
 
 ## Requirements
 

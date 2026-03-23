@@ -1,7 +1,7 @@
-
 import sys
 from datetime import datetime
 
+from .predictor import get_average_cycle_length, predict_next_period
 from .storage import add_period_start, get_period_starts
 
 
@@ -17,6 +17,8 @@ def print_usage() -> None:
     print("Usage:")
     print("  uv run -m cycle_tracker add YYYY-MM-DD")
     print("  uv run -m cycle_tracker history")
+    print("  uv run -m cycle_tracker predict")
+    print("  uv run -m cycle_tracker stats")
 
 
 def handle_add(args: list[str]) -> None:
@@ -46,6 +48,28 @@ def handle_history() -> None:
         print(f"{index}. {date_str}")
 
 
+def handle_predict() -> None:
+    dates = get_period_starts()
+    predicted_date = predict_next_period(dates)
+
+    if predicted_date is None:
+        print("Not enough data to predict the next period.")
+        return
+
+    print(f"Estimated next period start: {predicted_date}")
+
+
+def handle_stats() -> None:
+    dates = get_period_starts()
+    average_cycle_length = get_average_cycle_length(dates)
+
+    if average_cycle_length is None:
+        print("Not enough data to calculate statistics.")
+        return
+
+    print(f"Average cycle length: {average_cycle_length:.1f} days")
+
+
 def main() -> None:
     args = sys.argv[1:]
 
@@ -59,6 +83,10 @@ def main() -> None:
         handle_add(args[1:])
     elif command == "history":
         handle_history()
+    elif command == "predict":
+        handle_predict()
+    elif command == "stats":
+        handle_stats()
     else:
         print(f"Error: unknown command '{command}'")
         print_usage()
